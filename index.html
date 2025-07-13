@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather App - Beautiful & Modern</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="app-container">
+      <!-- Background Effects -->
+      <div class="background-effects">
+        <div class="gradient-overlay"></div>
+        <div class="animated-bg"></div>
+      </div>
+
+      <!-- Weather Particles Container -->
+      <div class="particles-container" id="particles"></div>
+
+      <!-- Main Content -->
+      <div class="main-content">
+        <!-- Weather Card -->
+        <div class="weather-card" id="weatherCard">
+          <!-- Header Section -->
+          <div class="card-header">
+            <div class="location-section">
+              <i class="fas fa-map-marker-alt location-icon"></i>
+              <div class="location-info">
+                <h1 class="city-name" id="cityName">Loading...</h1>
+                <p class="country" id="country">Getting location...</p>
+              </div>
+            </div>
+            <div class="header-controls">
+              <button class="search-btn" id="searchBtn">
+                <i class="fas fa-search"></i>
+              </button>
+              <div class="theme-toggle" id="themeToggle">
+                <i class="fas fa-sun theme-icon" id="themeIcon"></i>
+              </div>
+              <div class="unit-toggle">
+                <button class="unit-btn active" id="celsiusBtn" data-unit="C">
+                  °C
+                </button>
+                <button class="unit-btn" id="fahrenheitBtn" data-unit="F">
+                  °F
+                </button>
+              </div>
+              <button class="refresh-btn" id="refreshBtn">
+                <i class="fas fa-sync-alt"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Main Weather Display -->
+          <div class="main-weather">
+            <div class="weather-icon-container">
+              <img
+                class="weather-icon"
+                id="weatherIcon"
+                src=""
+                alt="Weather Icon"
+              />
+              <div class="icon-glow"></div>
+            </div>
+            <div class="temperature-section">
+              <h2 class="temperature" id="temperature">--°</h2>
+              <p class="feels-like">
+                Feels like <span id="feelsLike">--°</span>
+              </p>
+              <p class="weather-description" id="description">
+                Loading weather...
+              </p>
+            </div>
+          </div>
+
+          <!-- Location Search Modal -->
+          <div class="search-modal" id="searchModal">
+            <div class="search-content">
+              <div class="search-header">
+                <h3>Search Location</h3>
+                <button class="close-btn" id="closeSearchBtn">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+              <div class="search-body">
+                <div class="search-input-container">
+                  <input
+                    type="text"
+                    id="locationInput"
+                    placeholder="Enter city name (e.g., London, New York, Tokyo)"
+                    autocomplete="off"
+                  />
+                  <button class="search-submit-btn" id="searchSubmitBtn">
+                    <i class="fas fa-search"></i>
+                  </button>
+                </div>
+                <div class="search-suggestions" id="searchSuggestions"></div>
+                <div class="quick-locations">
+                  <h4>Popular Cities</h4>
+                  <div class="quick-location-grid">
+                    <button class="quick-location-btn" data-location="New York">
+                      New York
+                    </button>
+                    <button class="quick-location-btn" data-location="London">
+                      London
+                    </button>
+                    <button class="quick-location-btn" data-location="Tokyo">
+                      Tokyo
+                    </button>
+                    <button class="quick-location-btn" data-location="Paris">
+                      Paris
+                    </button>
+                    <button class="quick-location-btn" data-location="Sydney">
+                      Sydney
+                    </button>
+                    <button class="quick-location-btn" data-location="Dubai">
+                      Dubai
+                    </button>
+                    <button class="quick-location-btn" data-location="Mumbai">
+                      Mumbai
+                    </button>
+                    <button
+                      class="quick-location-btn"
+                      data-location="Singapore"
+                    >
+                      Singapore
+                    </button>
+                  </div>
+                </div>
+                <div class="current-location-btn-container">
+                  <button
+                    class="current-location-btn"
+                    id="useCurrentLocationBtn"
+                  >
+                    <i class="fas fa-location-arrow"></i>
+                    Use Current Location
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Weather Details Grid -->
+          <div class="weather-details">
+            <div class="detail-item">
+              <div class="detail-icon">
+                <i class="fas fa-wind"></i>
+              </div>
+              <div class="detail-info">
+                <span class="detail-label">Wind Speed</span>
+                <span class="detail-value" id="windSpeed">-- km/h</span>
+              </div>
+            </div>
+
+            <div class="detail-item">
+              <div class="detail-icon">
+                <i class="fas fa-tint"></i>
+              </div>
+              <div class="detail-info">
+                <span class="detail-label">Humidity</span>
+                <span class="detail-value" id="humidity">--%</span>
+              </div>
+            </div>
+
+            <div class="detail-item">
+              <div class="detail-icon">
+                <i class="fas fa-eye"></i>
+              </div>
+              <div class="detail-info">
+                <span class="detail-label">Visibility</span>
+                <span class="detail-value" id="visibility">-- km</span>
+              </div>
+            </div>
+
+            <div class="detail-item">
+              <div class="detail-icon">
+                <i class="fas fa-thermometer-half"></i>
+              </div>
+              <div class="detail-info">
+                <span class="detail-label">Pressure</span>
+                <span class="detail-value" id="pressure">-- hPa</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sun Times Section -->
+          <div class="sun-times">
+            <div class="sun-time-item">
+              <div class="sun-icon">
+                <i class="fas fa-sun sunrise-icon"></i>
+              </div>
+              <div class="sun-info">
+                <span class="sun-label">Sunrise</span>
+                <span class="sun-value" id="sunrise">--:--</span>
+              </div>
+            </div>
+
+            <div class="sun-time-item">
+              <div class="sun-icon">
+                <i class="fas fa-moon sunset-icon"></i>
+              </div>
+              <div class="sun-info">
+                <span class="sun-label">Sunset</span>
+                <span class="sun-value" id="sunset">--:--</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Additional Info Section -->
+          <div class="additional-info">
+            <div class="info-item uv-index">
+              <div class="info-header">
+                <i class="fas fa-sun"></i>
+                <span class="info-label">UV Index</span>
+              </div>
+              <div class="uv-display">
+                <span class="info-value" id="uvIndex">--</span>
+                <div class="uv-bar">
+                  <div class="uv-fill" id="uvFill"></div>
+                </div>
+                <span class="uv-level" id="uvLevel">--</span>
+              </div>
+            </div>
+
+            <div class="info-item air-quality">
+              <div class="info-header">
+                <i class="fas fa-leaf"></i>
+                <span class="info-label">Air Quality</span>
+              </div>
+              <div class="air-display">
+                <span class="info-value" id="airQuality">Good</span>
+                <div class="air-indicator" id="airIndicator"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Loading Spinner -->
+        <div class="loading-spinner" id="loadingSpinner">
+          <div class="spinner">
+            <div class="spinner-ring"></div>
+            <div class="spinner-ring"></div>
+            <div class="spinner-ring"></div>
+          </div>
+          <p class="loading-text">Getting weather data...</p>
+        </div>
+
+        <!-- Error Message -->
+        <div class="error-message" id="errorMessage">
+          <div class="error-content">
+            <i class="fas fa-exclamation-triangle error-icon"></i>
+            <h3 class="error-title">Unable to fetch weather data</h3>
+            <p class="error-description">
+              Please check your internet connection and try again.
+            </p>
+            <button class="retry-btn" id="retryBtn">
+              <i class="fas fa-redo"></i>
+              Try Again
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
